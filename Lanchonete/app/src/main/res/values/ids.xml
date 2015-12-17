@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="lanch" type="id">lanches</item>
+    <item name="preco" type="id">preco</item>
+    <item name="tvselecionado" type="id">tvselecionado</item>
+</resources>
