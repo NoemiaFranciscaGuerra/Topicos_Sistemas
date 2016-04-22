@@ -1,82 +1,67 @@
 package com.example.noemia.agenda;
 
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BancoHelper b;
-    private ListView listView;
-    private ArrayList<Contato> itens;
 
+    private BancoHelper bh;
+
+    @Bind(R.id.listView)
+    ListView listView;
+     private List<Contato> contatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        bh = new BancoHelper(getBaseContext());
+        contatos = bh.getAllContato();
 
-        b = new BancoHelper(getBaseContext(), "contato", null, 1);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        listView = (ListView) findViewById(R.id.listView);
-        itens = new ArrayList<Contato>();
-
-        CustonAdapter custonAdapter = new CustonAdapter(itens, getApplicationContext());
+        CustonAdapter custonAdapter = new CustonAdapter(contatos, getApplicationContext());
         listView.setAdapter(custonAdapter);
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                Contato contato = new Contato();
-                contato.setNome("contato" + itens.size());
-                contato.setNumero("");
-                itens.add(contato);
-                consultaAgenda();
-                CustonAdapter custonAdapter = new CustonAdapter(itens, getApplicationContext());
-                listView.setAdapter(custonAdapter);
-                Intent i = new Intent(getBaseContext(), Cadastro.class);
+            public void onClick(View view) {
+                Intent i = new Intent(getBaseContext(), Update.class);
                 startActivity(i);
-
             }
         });
-    }
 
-    private void consultaAgenda() {
-        String sql = "SELECT  nome,numero FROM contato";
-        itens = new ArrayList<Contato>();
-        Cursor cursor = b.mostrar(sql);
-
-        if (cursor.getCount() > 0) {
-            cursor.moveToFirst();
-            for (int i = 0; i < cursor.getCount(); i++) {
-                Contato l = new Contato();
-                l.setNome(cursor.getString(0));
-                l.setNumero(cursor.getString(1));
-                itens.add(l);
-                cursor.moveToNext();
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getBaseContext(),Update.class);
+                i.putExtra("contato",contatos.get(position));
+                startActivity(i);
             }
-        }
+        });
+
 
     }
 
-    private void Insere(Contato contato) {
-        SQLiteDatabase base = b.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("nome", contato.getNome());
-        values.put("numero", contato.getNumero());
+    private void atualizaLista() {
+        contato= bh.getAllContato();
 
+        CustonAdapter custonAdapter = new CustonAdapter(contato, getApplicationContext());
+        listView.setAdapter(custonAdapter);
     }
-
 }
+
+

@@ -31,9 +31,9 @@
                 android:layout_height="wrap_content"
                 android:text="Nome:"
                 android:id="@+id/textView3"
-                android:layout_alignTop="@+id/tvNumero2"
-                android:layout_toRightOf="@+id/tvNumero2"
-                android:layout_toEndOf="@+id/tvNumero2" />
+                android:layout_below="@+id/tvNumero2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -41,21 +41,19 @@
                 android:text="Contatos: "
                 android:layout_toRightOf="@+id/textView3"
 
-                android:layout_alignTop="@+id/tvNome"
                 android:layout_above="@+id/tvNumero2"
-                android:layout_alignRight="@+id/textView5"
-                android:layout_alignEnd="@+id/textView5" />
+                android:id="@+id/textView4"
+                android:layout_alignTop="@+id/tvNome" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Numero:"
                 android:id="@+id/textView5"
-                android:layout_below="@+id/textView3"
-                android:layout_toRightOf="@+id/imageView"
-                android:layout_toEndOf="@+id/imageView"
-                android:layout_marginLeft="66dp"
-                android:layout_marginStart="66dp" />
+                android:layout_alignBottom="@+id/imageView"
+                android:layout_toRightOf="@+id/tvNumero"
+                android:layout_toEndOf="@+id/tvNumero"
+                android:layout_marginBottom="45dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -63,14 +61,15 @@
                 android:id="@+id/tvNumero"
                 android:layout_alignTop="@+id/textView5" />
 
-    <ImageView
-           android:layout_width="130dp"
-           android:layout_height="130dp"
-            android:id="@+id/imageView"
-            android:layout_toLeftOf="@+id/textView2"
-        android:adjustViewBounds="true"
-        android:layout_above="@+id/tvNumero2" />
 
+    <ImageView
+             android:layout_width="130dp"
+             android:layout_height="130dp"
+             android:id="@+id/imageView"
+        android:adjustViewBounds="true"
+        android:layout_below="@+id/tvNumero2"
+        android:layout_alignRight="@+id/textView4"
+        android:layout_alignEnd="@+id/textView4" />
 
 
 </RelativeLayout>

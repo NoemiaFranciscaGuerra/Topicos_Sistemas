@@ -5,28 +5,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Noemia on 28/01/2016.
  */
 public class CustonAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
-    private ArrayList itens;
+    private List<Contato> contatos;
 
-    public CustonAdapter(ArrayList<Contato>itens, Context context){
-        this.itens= itens;
-        layoutInflater = layoutInflater.from(context);
+    public CustonAdapter(List<Contato> itens,Context context) {
+        this.contatos = contatos;
+        layoutInflater = LayoutInflater.from(context);
     }
+
     @Override
-    public int getCount(){
-        return itens.size();
+    public int getCount() {
+        return contatos.size();
     }
+
     @Override
-    public Object getItem(int position){
-        return itens.get(position);
+    public Object getItem(int position) {
+        return contatos.get(position);
     }
 
     @Override
@@ -35,13 +41,32 @@ public class CustonAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int positon,View convertView,ViewGroup parent){
-        Contato item = (Contato) itens.get(positon);
-        convertView= layoutInflater.inflate(R.layout.activity_contato, null);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        Contato l = contatos.get(position);
 
-                ((TextView)convertView.findViewById(R.id.tvNome)).setText(item.getNome());
-               ((TextView)convertView.findViewById(R.id.tvNumero)).setText(item.getNumero());
-                      return convertView;
+        if (convertView != null) {
+            holder = (ViewHolder) convertView.getTag();
+        } else {
+            //convertView =  layoutInflater.inflate(R.layout.item_layout, parent, false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
+        }
+        holder.nome.setText(l.getNome());
+        holder.imagem.setImageResource(l.getImagem());
+        holder.numero.setText(l.getNumero());
 
+        return convertView;
+    }
+
+    static class ViewHolder {
+        @Bind(R.id.tvNome) TextView nome;
+        @Bind(R.id.tvNumero) TextView numero;
+        @Bind(R.id.imageView)
+        ImageView imagem;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }
