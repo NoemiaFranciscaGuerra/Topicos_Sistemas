@@ -25,24 +25,26 @@ public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private List<Contato> contatos;
     Firebase BancoFirabse;
+    private BancoHelper bh;
 
 Button cad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-        BancoFirabse= new Firebase("https://aulanoemia.firebaseio.com/contatos");
+        BancoFirabse= FirebaseInstance.getInstance();
+
+        bh = new BancoHelper(getBaseContext());
         contatos= new ArrayList<Contato>();
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.listView);
 
-        atualizaLista();
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                atualizaLista();
 
                 Intent i = new Intent(getBaseContext(), Cadastro.class);
 
@@ -57,33 +59,19 @@ Button cad;
                 //Funcao de delete
                 BancoFirabse.child(contatos.get(position).getId()).removeValue();
                 //usando funcao de update
-
-                atualizaLista();
+                bh.deleteContato(contatos.get(position));
             }
         });
-
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                return false;
-            }
-        });
-
-
-    }
-
-    private void atualizaLista() {
-
         BancoFirabse.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot d:dataSnapshot.getChildren()){
-                    Contato c= d.getValue(Contato.class);
-            c.setId(d.getKey());
+                contatos = new ArrayList<Contato>();
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    Contato c = d.getValue(Contato.class);
+                    c.setId(d.getKey());
                     contatos.add(c);
-
                 }
-               // if(listView.getAdapter()!= null )
+                // if(listView.getAdapter()!= null )
                 //((CustonAdapter)listView.getAdapter()).Clear();
 
                 CustonAdapter custonAdapter = new CustonAdapter(contatos, getApplicationContext());
@@ -96,7 +84,6 @@ Button cad;
             }
         });
 
-
-      //
     }
+
 }

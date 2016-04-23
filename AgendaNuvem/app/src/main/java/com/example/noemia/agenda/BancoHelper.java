@@ -33,7 +33,7 @@ public class BancoHelper extends SQLiteOpenHelper {
     // Criando tabela
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE contato(_id INTEGER PRIMARY KEY  AUTOINCREMENT,nome TEXT, numero TEXT, imagem TEXT)";
+        String sql = "CREATE TABLE contato(_id TEXT PRIMARY KEY ,nome TEXT, numero TEXT, imagem TEXT)";
         db.execSQL(sql);
     }
 
@@ -54,6 +54,7 @@ public class BancoHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put("_id", contato.getId());
         values.put("nome", contato.getNome());
         values.put("numero", contato.getNumero());
         values.put("imagem", contato.getImagem());
@@ -122,14 +123,14 @@ public class BancoHelper extends SQLiteOpenHelper {
 
         // updating row
         return db.update(TABLE_NAME, values,  "_id = ?",
-                new String[] { String.valueOf(contato.getId()) });
+                new String[] { contato.getId() });
     }
 
-    // Delettando um contato
+    // Deletando um contato
     public void deleteContato(Contato contato) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NAME, " _id= ?",
-                new String[]{String.valueOf(contato.getId())});
+                new String[]{contato.getId()});
         db.close();
     }
 

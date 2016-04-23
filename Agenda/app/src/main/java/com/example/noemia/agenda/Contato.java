@@ -9,8 +9,8 @@ import java.io.Serializable;
 public class Contato implements Serializable {
     private String nome;
     private String numero;
-    private int imagem;
-    private int id;
+    private String imagem;
+    private String id;
 
 
     public Contato(int id, String nome, String numero, int imagem) {

@@ -28,6 +28,7 @@ public class Cadastro extends AppCompatActivity {
     Firebase BancoFirabse ;
     ImageView imagem;
     Button foto;
+    Firebase novoPost, posRef;
 
     private Contato contato;
     private String localFoto;
@@ -38,11 +39,11 @@ public class Cadastro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
-        BancoFirabse = new Firebase("https://aulanoemia.firebaseio.com/contatos");
+        BancoFirabse = FirebaseInstance.getInstance();
         setContentView(R.layout.activity_cadastro);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         cadastro = (Button) findViewById(R.id.bt_cad);
-        imagem = (ImageView) findViewById(R.id.imageView);
+        imagem = (ImageView) findViewById(R.id.imageView2);
         foto = (Button) findViewById(R.id.btImagem);
         bh = new BancoHelper(getBaseContext());
         FloatingActionButton cont = (FloatingActionButton) findViewById(R.id.fab);
@@ -64,6 +65,9 @@ public class Cadastro extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Contato c = new Contato();
+                posRef = BancoFirabse.child("contatos");
+                novoPost = posRef.push();
+                c.setId(novoPost.getKey());
                 c.setNome(((EditText) findViewById(R.id.edtNome)).getText().toString());
                 c.setNumero(((EditText) findViewById(R.id.edtNumero)).getText().toString());
                 //c.setImagem((String) imagem.getTag());
@@ -71,6 +75,8 @@ public class Cadastro extends AppCompatActivity {
                 BancoFirabse.push().setValue(c);
                 ((EditText) findViewById(R.id.edtNome)).setText("");
                 ((EditText) findViewById(R.id.edtNumero)).setText("");
+                bh.addContato(c);
+                finish();
                 //imagem.setTag("");
 
             }

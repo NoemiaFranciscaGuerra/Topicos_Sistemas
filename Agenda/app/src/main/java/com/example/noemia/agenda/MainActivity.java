@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        bh = new BancoHelper(getBaseContext());
+        bh = new BancoHelper(this.getBaseContext());
         contatos = bh.getAllContato();
 
 

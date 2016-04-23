@@ -48,7 +48,7 @@ public class CustonAdapter extends BaseAdapter {
         if (convertView != null) {
             holder = (ViewHolder) convertView.getTag();
         } else {
-            //convertView =  layoutInflater.inflate(R.layout.item_layout, parent, false);
+            convertView =  layoutInflater.inflate(R.layout.activity_contato, parent, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }
