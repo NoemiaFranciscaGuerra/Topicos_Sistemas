@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.noemia.agenda.ContatoActivity">
+
+    <ImageView
+           android:layout_width="130dp"
+           android:layout_height="130dp"
+            android:id="@+id/imageView"
+        android:adjustViewBounds="true"
+        android:layout_alignTop="@+id/tvContato"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome :"
+        android:id="@+id/tvContato"
+        android:textColor="@color/text"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNome"
+        android:textColor="@color/text"
+        android:layout_alignTop="@+id/tvContato"
+        android:layout_toRightOf="@+id/tvContato"
+        android:layout_toEndOf="@+id/tvContato"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Numero :"
+        android:id="@+id/textView4"
+        android:textColor="@color/text"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignLeft="@+id/tvContato"
+        android:layout_alignStart="@+id/tvContato"
+        android:layout_marginBottom="37dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvNumero2"
+        android:textColor="@color/text"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_toRightOf="@+id/textView4"
+        android:layout_toEndOf="@+id/textView4" />
+
+
+</RelativeLayout>
+
+
