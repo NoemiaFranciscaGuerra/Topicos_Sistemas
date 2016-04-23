@@ -17,10 +17,10 @@
         </activity>
         <activity android:name="com.example.noemia.agenda.ContatoActivity"></activity>
         <activity
+
             android:name="com.example.noemia.agenda.Cadastro"
             android:label="@string/title_activity_cadastro"
             android:theme="@style/AppTheme.NoActionBar">
-
 
         </activity>
 

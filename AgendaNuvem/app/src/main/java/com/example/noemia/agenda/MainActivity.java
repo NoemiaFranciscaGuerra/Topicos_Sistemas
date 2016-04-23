@@ -20,8 +20,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-   /* Banco b = new Banco(getBaseContext(), "contato", null, 1);**/
-
     private ListView listView;
     private List<Contato> contatos;
     Firebase BancoFirabse;
@@ -71,8 +69,6 @@ Button cad;
                     c.setId(d.getKey());
                     contatos.add(c);
                 }
-                // if(listView.getAdapter()!= null )
-                //((CustonAdapter)listView.getAdapter()).Clear();
 
                 CustonAdapter custonAdapter = new CustonAdapter(contatos, getApplicationContext());
                 listView.setAdapter(custonAdapter);

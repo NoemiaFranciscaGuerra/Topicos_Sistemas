@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import static com.example.noemia.agenda.R.id.imageView;
+
 /**
  * Created by Noemia on 28/01/2016.
  */
@@ -45,7 +47,7 @@ public class CustonAdapter extends BaseAdapter {
 
         ((TextView) convertView.findViewById(R.id.tvNome)).setText(item.getNome());
         ((TextView) convertView.findViewById(R.id.tvNumero2)).setText(item.getNumero());
-        ((ImageView) convertView.findViewById(R.id.imageView)).setTag(item.getImagem());
+        ((ImageView) convertView.findViewById(imageView)).setTag(item.getImagem());
         return convertView;
 
     }

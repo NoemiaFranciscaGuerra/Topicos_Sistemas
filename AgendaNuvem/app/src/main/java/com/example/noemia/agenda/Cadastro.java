@@ -39,13 +39,16 @@ public class Cadastro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
+
         BancoFirabse = FirebaseInstance.getInstance();
         setContentView(R.layout.activity_cadastro);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         cadastro = (Button) findViewById(R.id.bt_cad);
         imagem = (ImageView) findViewById(R.id.imageView2);
         foto = (Button) findViewById(R.id.btImagem);
         bh = new BancoHelper(getBaseContext());
+
         FloatingActionButton cont = (FloatingActionButton) findViewById(R.id.fab);
         setSupportActionBar(toolbar);
 
@@ -70,14 +73,16 @@ public class Cadastro extends AppCompatActivity {
                 c.setId(novoPost.getKey());
                 c.setNome(((EditText) findViewById(R.id.edtNome)).getText().toString());
                 c.setNumero(((EditText) findViewById(R.id.edtNumero)).getText().toString());
-                //c.setImagem((String) imagem.getTag());
-                //bh.addContato(c);
+                c.setImagem((String) imagem.getTag());
+                bh.addContato(c);
+
                 BancoFirabse.push().setValue(c);
                 ((EditText) findViewById(R.id.edtNome)).setText("");
                 ((EditText) findViewById(R.id.edtNumero)).setText("");
                 bh.addContato(c);
                 finish();
-                //imagem.setTag("");
+
+                imagem.setTag("");
 
             }
         });
